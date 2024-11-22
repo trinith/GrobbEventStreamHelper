@@ -28,10 +28,17 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetRepository.cs" />
     <Compile Include="EngineCore.cs" />
+    <Compile Include="EventStatus\ControllingFactionChangedEventArgs.cs" />
+    <Compile Include="EventStatus\EventModel.cs" />
+    <Compile Include="EventStatus\EventStatusTimeController.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
+    <Compile Include="EventStatus\Faction.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Scenes\EventLive\ProgressBarLayer.cs" />
     <Compile Include="Scenes\EventLive\RootScene_EventLive.cs" />
+    <Compile Include="Scenes\EventLive\ProgressView.cs" />
     <Compile Include="Scenes\RootSceneId.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,8 +60,14 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ArbitraryPixel.Tenvis.Assets">
+      <HintPath>..\..\..\ArbitraryPixel.Tenvis\bin\net8.0\ArbitraryPixel.Tenvis.Assets.dll</HintPath>
+    </Reference>
     <Reference Include="ArbitraryPixel.Tenvis.Core">
       <HintPath>..\..\..\..\Repos\ArbitraryPixel.Tenvis\bin\net8.0\ArbitraryPixel.Tenvis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ArbitraryPixel.Tenvis.Rendering">
+      <HintPath>..\..\..\ArbitraryPixel.Tenvis\bin\net8.0\ArbitraryPixel.Tenvis.Rendering.dll</HintPath>
     </Reference>
   </ItemGroup>
 
