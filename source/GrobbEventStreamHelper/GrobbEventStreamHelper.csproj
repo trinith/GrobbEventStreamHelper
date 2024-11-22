@@ -28,8 +28,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EngineCore.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Scenes\EventLive\RootScene_EventLive.cs" />
+    <Compile Include="Scenes\RootSceneId.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="nkast.Xna.Framework" Version="3.12.9001" />
