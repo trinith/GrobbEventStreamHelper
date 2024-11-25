@@ -29,16 +29,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetRepository.cs" />
+    <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\ButtonState.cs" />
     <Compile Include="EngineCore.cs" />
     <Compile Include="EventStatus\ControllingFactionChangedEventArgs.cs" />
     <Compile Include="EventStatus\EventModel.cs" />
     <Compile Include="EventStatus\EventStatusTimeController.cs" />
+    <Compile Include="Scenes\EventLive\FactionToggleButtonLayer.cs" />
     <Compile Include="TimeScale.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
     <Compile Include="EventStatus\Faction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Scenes\EventLive\ProgressBarLayer.cs" />
-    <Compile Include="Controls\ProgressBarModel.cs" />
+    <Compile Include="Controls\ProgressBar.cs" />
     <Compile Include="Scenes\EventLive\RootScene_EventLive.cs" />
     <Compile Include="Controls\ProgressBarView.cs" />
     <Compile Include="Scenes\RootSceneId.cs" />

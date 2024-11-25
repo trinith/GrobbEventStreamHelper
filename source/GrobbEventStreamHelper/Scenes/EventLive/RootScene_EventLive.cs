@@ -45,6 +45,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
             // Register child scenes.
             this.CreateChild<ProgressBarLayer>(eventModel);
+            this.CreateChild<FactionToggleButtonLayer>(eventModel);
 
             base.OnInitialize();
         }

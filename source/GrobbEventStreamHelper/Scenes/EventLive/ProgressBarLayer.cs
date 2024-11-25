@@ -17,9 +17,8 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
         }
 
         private EventModel _model;
-        private SpriteBatch _spriteBatch;
 
-        private ProgressBarModel _durationProgressBar;
+        private ProgressBar _durationProgressBar;
 
         public ProgressBarLayer(EventModel model)
         {
@@ -29,13 +28,13 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
         protected override void OnInitialize()
         {
             GraphicsDeviceManager graphics = this.Parent.Components.GetComponent<GraphicsDeviceManager>();
+            SpriteBatch spriteBatch = this.Parent.Components.GetComponent<SpriteBatch>();
+
             Point screenSize = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            Point padding = new Point(8, 8);
+            Rectangle barBounds = new Rectangle(padding.X, padding.Y, screenSize.X - padding.X * 2, Constants.ProgressHeight);
 
-            _spriteBatch = this.Parent.Components.GetComponent<SpriteBatch>();
-
-            Rectangle barBounds = new Rectangle(0, 0, screenSize.X, Constants.ProgressHeight);
-
-            _durationProgressBar = new ProgressBarModel()
+            _durationProgressBar = new ProgressBar()
             {
                 Bounds = barBounds,
                 CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
@@ -48,7 +47,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             this.Views.Add(
                 new ProgressBarView(
                     _durationProgressBar,
-                    _spriteBatch
+                    spriteBatch
                 )
             );
 

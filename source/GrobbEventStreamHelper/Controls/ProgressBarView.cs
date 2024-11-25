@@ -11,10 +11,10 @@ namespace GrobbEventStreamHelper.Controls
     {
         public delegate double CurrentProgressFunction();
 
-        private ProgressBarModel _model;
+        private ProgressBar _model;
         private SpriteBatch _spriteBatch;
 
-        public ProgressBarView(ProgressBarModel model, SpriteBatch spriteBatch)
+        public ProgressBarView(ProgressBar model, SpriteBatch spriteBatch)
         {
             _model = model;
             _spriteBatch = spriteBatch;

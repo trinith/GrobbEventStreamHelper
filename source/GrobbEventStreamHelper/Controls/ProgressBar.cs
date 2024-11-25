@@ -4,7 +4,7 @@ using static GrobbEventStreamHelper.Controls.ProgressBarView;
 
 namespace GrobbEventStreamHelper.Controls
 {
-    public class ProgressBarModel
+    public class ProgressBar
     {
         public Rectangle Bounds;
         public Texture2D PixelTexture;
