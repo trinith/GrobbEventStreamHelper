@@ -18,6 +18,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
         private Dictionary<Faction, Button> _factionToggleButtons = new Dictionary<Faction, Button>();
         private SpriteBatch _spriteBatch;
         private Texture2D _pixel;
+        private SpriteFont _buttonFont;
 
         public FactionToggleButtonLayer(EventModel eventModel)
         {
@@ -31,6 +32,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
             _spriteBatch = this.Parent.Components.GetComponent<SpriteBatch>();
             _pixel = this.Parent.Components.GetComponent<IAssetBank>().Get<Texture2D>(AssetRepository.Textures.Pixel.Name);
+            _buttonFont = this.Parent.Components.GetComponent<IAssetBank>().Get<SpriteFont>(AssetRepository.Fonts.FactionButtonText.Name);
 
             GenerateButtons(screenSize);
 
@@ -74,6 +76,13 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     b.Bounds,
                     Color.Pink
                 );
+
+                Point textSize = _buttonFont.MeasureString(b.Text).ToPoint();
+                Point textPos = new Point(
+                    b.Bounds.Center.X - textSize.X / 2,
+                    b.Bounds.Center.Y - textSize.Y / 2
+                );
+                _spriteBatch.DrawString(_buttonFont, b.Text, textPos.ToVector2(), Color.White);
             }
 
             base.OnDraw(gameTime);

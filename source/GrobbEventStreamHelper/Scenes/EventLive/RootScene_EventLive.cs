@@ -56,6 +56,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             ContentManager contentManager = this.Components.GetComponent<ContentManager>();
 
             assetBank.Put(AssetRepository.Textures.Pixel, _graphics);
+            assetBank.Put<SpriteFont>(contentManager, AssetRepository.Fonts.FactionButtonText);
         }
 
         protected override void OnUninitialize()

@@ -11,20 +11,25 @@ namespace GrobbEventStreamHelper.Assets
         public static class Textures
         {
             public static CustomAssetDescriptor<Texture2D> Pixel => new CustomAssetDescriptor<Texture2D>("PixelTexture", CreatePixelTexture);
+
+            private static Texture2D CreatePixelTexture(params object[] parameters)
+            {
+                if (parameters == null || parameters.Length == 0)
+                    throw new ArgumentException();
+
+                GraphicsDevice graphicsDevice = parameters[0] as GraphicsDevice;
+                if (graphicsDevice == null)
+                    throw new ArgumentException();
+
+                Texture2D pixelTexture = new Texture2D(graphicsDevice, 1, 1);
+                pixelTexture.SetData(new Color[] { Color.White });
+                return pixelTexture;
+            }
         }
 
-        private static Texture2D CreatePixelTexture(params object[] parameters)
+        public static class Fonts
         {
-            if (parameters == null || parameters.Length == 0)
-                throw new ArgumentException();
-
-            GraphicsDevice graphicsDevice = parameters[0] as GraphicsDevice;
-            if (graphicsDevice == null)
-                throw new ArgumentException();
-
-            Texture2D pixelTexture = new Texture2D(graphicsDevice, 1, 1);
-            pixelTexture.SetData(new Color[] { Color.White });
-            return pixelTexture;
+            public static BasicAssetDescriptor FactionButtonText => new BasicAssetDescriptor("FactionButtonText", @"Fonts\Debug");
         }
     }
 }
