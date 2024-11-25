@@ -50,19 +50,5 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
             base.OnInitialize();
         }
-
-        protected override void OnUninitialize()
-        {
-            // GT_TODO: Roll clear calls into the scene base class.
-            /* Context:
-             *  If the intention is to create/setup this scene's components, controllers, and views in Initialize then
-             *  the convention should be to destroy them during Uninitialize. This would imply tha the base class
-             *  should do this automatically.
-             */
-            this.Components.Clear();
-            this.Controllers.Clear();
-            this.Views.Clear();
-            base.OnUninitialize();
-        }
     }
 }

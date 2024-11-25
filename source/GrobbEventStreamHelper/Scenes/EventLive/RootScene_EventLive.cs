@@ -60,10 +60,6 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
         protected override void OnUninitialize()
         {
             this.Components.GetComponent<ContentManager>().Unload();
-            this.Components.Clear();
-            this.Controllers.Clear();
-            this.Views.Clear();
-
             base.OnUninitialize();
         }
 
