@@ -32,6 +32,8 @@
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\ButtonController.cs" />
     <Compile Include="Controls\ButtonView.cs" />
+    <Compile Include="Controls\ToggleButton.cs" />
+    <Compile Include="Controls\ToggleButtonView.cs" />
     <Compile Include="EngineCore.cs" />
     <Compile Include="EventStatus\ControllingFactionChangedEventArgs.cs" />
     <Compile Include="EventStatus\EventModel.cs" />

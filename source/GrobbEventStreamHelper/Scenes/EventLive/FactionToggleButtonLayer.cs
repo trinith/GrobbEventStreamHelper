@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 
 namespace GrobbEventStreamHelper.Scenes.EventLive
 {
@@ -42,7 +42,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
         private EventModel _eventModel;
 
-        private Dictionary<Faction, Button> _factionToggleButtons = new Dictionary<Faction, Button>();
+        private Dictionary<Faction, ToggleButton> _factionToggleButtons = new Dictionary<Faction, ToggleButton>();
 
         private Dictionary<Faction, ButtonView.ColourSettings> _buttonColourSettings = new Dictionary<Faction, ButtonView.ColourSettings>();
 
@@ -90,7 +90,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             {
                 Faction faction = factionButtons[i];
 
-                Button newButton = new Button()
+                ToggleButton newButton = new ToggleButton()
                 {
                     Bounds = new Rectangle(
                         new Point(anchor.X + i * buttonSize.X + i * padding.X, anchor.Y),
@@ -99,24 +99,33 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     Text = faction.ToString(),
                     Tag = faction
                 };
+
+                if (faction == _eventModel.ControllingFaction)
+                    newButton.Activate();
+
                 _factionToggleButtons.Add(faction, newButton);
 
                 newButton.Clicked += this.EventHandler_ButtonClicked;
 
                 this.Controllers.Add(new ButtonController(newButton));
-                this.Views.Add(new ButtonView(newButton, renderSettings, _buttonColourSettings[faction]));
+                this.Views.Add(new ToggleButtonView(newButton, renderSettings, _buttonColourSettings[faction]));
             }
+
+            IEnumerable<ToggleButton> buttonGroup = _factionToggleButtons.Values.ToArray();
+            foreach (ToggleButton button in buttonGroup)
+                button.LinkTo(buttonGroup);
         }
 
         private void EventHandler_ButtonClicked(object sender, EventArgs e)
         {
-            Button b = sender as Button;
+            ToggleButton b = sender as ToggleButton;
             if (b == null)
                 return;
 
             if (b.Tag is not Faction)
                 return;
 
+            b.Activate();
             _eventModel.SetControllingFaction((Faction)b.Tag);
         }
     }

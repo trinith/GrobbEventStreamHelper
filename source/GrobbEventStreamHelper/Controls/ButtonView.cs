@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using static GrobbEventStreamHelper.Controls.ButtonView;
 
 namespace GrobbEventStreamHelper.Controls
 {
@@ -30,15 +31,26 @@ namespace GrobbEventStreamHelper.Controls
             public Color Hot = Color.White;
         }
 
+        protected class ViewSettings
+        {
+            public RenderSettings Render { get; private set; }
+            public ColourSettings Colour { get; private set; }
+
+            public ViewSettings(RenderSettings renderSettings, ColourSettings colourSettings)
+            {
+                this.Render = renderSettings ?? throw new ArgumentNullException();
+                this.Colour = colourSettings ?? throw new ArgumentNullException();
+            }
+        }
+
         private Button _button;
-        private RenderSettings _renderSettings;
-        private ColourSettings _colourSettings;
+
+        protected ViewSettings Settings;
 
         public ButtonView(Button button, RenderSettings renderSettings, ColourSettings colourSettings)
         {
             _button = button ?? throw new ArgumentNullException();
-            _renderSettings = renderSettings ?? throw new ArgumentNullException();
-            _colourSettings = colourSettings ?? throw new ArgumentNullException();
+            this.Settings = new ViewSettings(renderSettings, colourSettings);
         }
 
         protected override void OnDraw(GameTime gameTime)
@@ -52,33 +64,33 @@ namespace GrobbEventStreamHelper.Controls
         {
             Color colour = (_button.IsHot)
                 ? (_button.State == ButtonState.Pressed)
-                    ? _colourSettings.Pressed
-                    : _colourSettings.Hot
-                : _colourSettings.Normal;
+                    ? this.Settings.Colour.Pressed
+                    : this.Settings.Colour.Hot
+                : this.Settings.Colour.Normal;
 
-            _renderSettings.SpriteBatch.DrawFilledRectangle(
-                _renderSettings.Texture,
+            this.Settings.Render.SpriteBatch.DrawFilledRectangle(
+                this.Settings.Render.Texture,
                 bounds,
                 colour
             );
 
             bounds.Inflate(-4, -4);
 
-            _renderSettings.SpriteBatch.DrawFilledRectangle(
-                _renderSettings.Texture,
+            this.Settings.Render.SpriteBatch.DrawFilledRectangle(
+                this.Settings.Render.Texture,
                 bounds,
                 Color.Black
             );
 
             if (!string.IsNullOrEmpty(_button.Text))
             {
-                SpriteFont font = _renderSettings.Font;
+                SpriteFont font = this.Settings.Render.Font;
                 Point textSize = font.MeasureString(_button.Text).ToPoint();
                 Point textPos = new Point(
                     bounds.Center.X - textSize.X / 2,
                     bounds.Center.Y - textSize.Y / 2
                 );
-                _renderSettings.SpriteBatch.DrawString(font, _button.Text, textPos.ToVector2(), colour);
+                this.Settings.Render.SpriteBatch.DrawString(font, _button.Text, textPos.ToVector2(), colour);
             }
         }
     }

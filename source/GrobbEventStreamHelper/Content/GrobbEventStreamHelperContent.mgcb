@@ -21,3 +21,19 @@
 /processorParam:Smoothing=Normal
 /build:Fonts/Debug.spritefont
 
+#begin Fonts/FactionButtonText.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/processorParam:Smoothing=Normal
+/build:Fonts/FactionButtonText.spritefont
+
+#begin Fonts/ProgressBarText.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/processorParam:Smoothing=Normal
+/build:Fonts/ProgressBarText.spritefont
+
