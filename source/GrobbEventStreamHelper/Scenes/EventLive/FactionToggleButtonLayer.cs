@@ -19,23 +19,23 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             {
                 public static ButtonView.ColourSettings Alliance { get; private set; } = new ButtonView.ColourSettings()
                 {
-                    Normal = new Color(0, 0, 128),
-                    Hot = new Color(32, 64, 256),
-                    Pressed = new Color(64, 128, 256),
-                };
-
-                public static ButtonView.ColourSettings Neutral { get; private set; } = new ButtonView.ColourSettings()
-                {
-                    Normal = new Color(64, 64, 64),
-                    Hot = new Color(128, 128, 128),
-                    Pressed = new Color(192, 192, 192),
+                    Normal = GlobalConstants.Colours.Alliance.Dark,
+                    Hot = GlobalConstants.Colours.Alliance.Normal,
+                    Pressed = GlobalConstants.Colours.Alliance.Light,
                 };
 
                 public static ButtonView.ColourSettings Horde { get; private set; } = new ButtonView.ColourSettings()
                 {
-                    Normal = new Color(128, 0, 0),
-                    Hot = new Color(192, 0, 0),
-                    Pressed = new Color(256, 128, 128),
+                    Normal = GlobalConstants.Colours.Horde.Dark,
+                    Hot = GlobalConstants.Colours.Horde.Normal,
+                    Pressed = GlobalConstants.Colours.Horde.Light,
+                };
+
+                public static ButtonView.ColourSettings Neutral { get; private set; } = new ButtonView.ColourSettings()
+                {
+                    Normal = GlobalConstants.Colours.Neutral.Dark,
+                    Hot = GlobalConstants.Colours.Neutral.Normal,
+                    Pressed = GlobalConstants.Colours.Neutral.Light,
                 };
             }
         }
@@ -126,7 +126,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                 return;
 
             b.Activate();
-            _eventModel.SetControllingFaction((Faction)b.Tag);
+            _eventModel.ControllingFaction = (Faction)b.Tag;
         }
     }
 }

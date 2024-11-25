@@ -26,7 +26,7 @@ namespace GrobbEventStreamHelper
             components.RegisterComponent(_graphics);
             components.RegisterComponent(this.Content);
 #if DEBUG
-            //components.RegisterComponent(new TimeScale() { Value = 100.0 });
+            components.RegisterComponent(new TimeScale() { Value = 100.0 });
 #endif
 
             _engine = new EngineCore(components);

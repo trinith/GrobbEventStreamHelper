@@ -18,8 +18,6 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
         private EventModel _model;
 
-        private ProgressBar _durationProgressBar;
-
         public ProgressBarLayer(EventModel model)
         {
             _model = model ?? throw new ArgumentNullException();
@@ -37,23 +35,75 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
             Point screenSize = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Point padding = new Point(8, 8);
-            Rectangle barBounds = new Rectangle(padding.X, padding.Y, screenSize.X - padding.X * 2, Constants.ProgressHeight);
-
-            _durationProgressBar = new ProgressBar()
-            {
-                Bounds = barBounds,
-                CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
-            };
+            Rectangle bounds = new Rectangle(padding.X, padding.Y, screenSize.X - padding.X * 2, Constants.ProgressHeight);
 
             // Event duration progress.
             this.Views.Add(
                 new ProgressBarView(
-                    _durationProgressBar,
+                    new ProgressBar()
+                    {
+                        Bounds = bounds,
+                        CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
+                    },
                     renderSettings,
                     new ProgressBarView.ColourSettings()
                     {
                         Background = Color.Black,
                         Foreground = Color.Green,
+                    }
+                )
+            );
+
+            // Neutral progress.
+            bounds.Location += new Point(0, bounds.Height + padding.Y);
+            this.Views.Add(
+                new ProgressBarView(
+                    new ProgressBar()
+                    {
+                        Bounds = bounds,
+                        CurrentProgress = () => { return _model.ControlTime[Faction.Neutral] / _model.ControlTime[_model.WinningFaction]; },
+                    },
+                    renderSettings,
+                    new ProgressBarView.ColourSettings()
+                    {
+                        Background = Color.Black,
+                        Foreground = GlobalConstants.Colours.Neutral.Normal,
+                    }
+                )
+            );
+
+            // Alliance progress.
+            bounds.Location += new Point(0, bounds.Height + padding.Y);
+            this.Views.Add(
+                new ProgressBarView(
+                    new ProgressBar()
+                    {
+                        Bounds = bounds,
+                        CurrentProgress = () => { return _model.ControlTime[Faction.Alliance] / _model.ControlTime[_model.WinningFaction]; },
+                    },
+                    renderSettings,
+                    new ProgressBarView.ColourSettings()
+                    {
+                        Background = Color.Black,
+                        Foreground = GlobalConstants.Colours.Alliance.Normal,
+                    }
+                )
+            );
+
+            // Horde progress.
+            bounds.Location += new Point(0, bounds.Height + padding.Y);
+            this.Views.Add(
+                new ProgressBarView(
+                    new ProgressBar()
+                    {
+                        Bounds = bounds,
+                        CurrentProgress = () => { return _model.ControlTime[Faction.Horde] / _model.ControlTime[_model.WinningFaction]; },
+                    },
+                    renderSettings,
+                    new ProgressBarView.ColourSettings()
+                    {
+                        Background = Color.Black,
+                        Foreground = GlobalConstants.Colours.Horde.Normal,
                     }
                 )
             );

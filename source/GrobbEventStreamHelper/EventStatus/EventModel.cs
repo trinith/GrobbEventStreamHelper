@@ -5,9 +5,49 @@ namespace GrobbEventStreamHelper.EventStatus
 {
     public class EventModel
     {
+        private Faction _controllingFaction = Faction.Neutral;
+        private Faction _winningFaction = Faction.Neutral;
+
         public TimeSpan Duration { get; private set; }
         public TimeSpan ElapsedTime { get; private set; } = TimeSpan.Zero;
-        public Faction ControllingFaction { get; private set; } = Faction.Neutral;
+        public Faction ControllingFaction
+        {
+            get { return _controllingFaction; }
+            set
+            {
+                if (this.IsComplete)
+                    return;
+
+                if (_controllingFaction == value)
+                    return;
+
+                FactionChangeEventArgs args = new FactionChangeEventArgs(_controllingFaction, value);
+                _controllingFaction = args.Current;
+
+                if (this.ControllingFactionChanged != null)
+                    this.ControllingFactionChanged(this, args);
+            }
+        }
+
+        public Faction WinningFaction
+        {
+            get { return _winningFaction; }
+            set
+            {
+                if (this.IsComplete)
+                    return;
+
+                if (_winningFaction == value)
+                    return;
+
+                FactionChangeEventArgs args = new FactionChangeEventArgs(_winningFaction, value);
+                _winningFaction = args.Current;
+
+                if (this.WinningFactionChanged != null)
+                    this.WinningFactionChanged(this, args);
+            }
+        }
+
         public Dictionary<Faction, TimeSpan> ControlTime { get; private set; } = new Dictionary<Faction, TimeSpan>();
 
         public bool IsComplete
@@ -15,7 +55,8 @@ namespace GrobbEventStreamHelper.EventStatus
             get { return this.ElapsedTime >= this.Duration; }
         }
 
-        public event EventHandler<ControllingFactionChangedEventArgs> ControllingFactionChanged;
+        public event EventHandler<FactionChangeEventArgs> ControllingFactionChanged;
+        public event EventHandler<FactionChangeEventArgs> WinningFactionChanged;
 
         public EventModel(TimeSpan duration)
         {
@@ -26,21 +67,8 @@ namespace GrobbEventStreamHelper.EventStatus
 
             foreach (Faction faction in Enum.GetValues<Faction>())
                 this.ControlTime.Add(faction, TimeSpan.Zero);
-        }
 
-        public void SetControllingFaction(Faction faction)
-        {
-            if (this.IsComplete)
-                return;
-
-            if (this.ControllingFaction == faction)
-                return;
-
-            Faction oldFaction = this.ControllingFaction;
-            this.ControllingFaction = faction;
-
-            if (this.ControllingFactionChanged != null)
-                this.ControllingFactionChanged(this, new ControllingFactionChangedEventArgs(oldFaction, faction));
+            this.WinningFaction = this.ControllingFaction;
         }
 
         public void AddElapsedTime(TimeSpan elapsedTime)
@@ -56,6 +84,9 @@ namespace GrobbEventStreamHelper.EventStatus
 
             this.ElapsedTime += elapsedTime;
             this.ControlTime[this.ControllingFaction] += elapsedTime;
+
+            if (this.ControllingFaction != this.WinningFaction && this.ControlTime[this.ControllingFaction] > this.ControlTime[this.WinningFaction])
+                this.WinningFaction = this.ControllingFaction;
         }
     }
 }

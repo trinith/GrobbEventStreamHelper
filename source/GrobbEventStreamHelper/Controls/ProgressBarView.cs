@@ -56,8 +56,6 @@ namespace GrobbEventStreamHelper.Controls
             Color fillColour = this.Settings.Colour.Foreground;
             int padding = 4;
 
-            this.Settings.Render.SpriteBatch.DrawFilledRectangle(this.Settings.Render.Texture, bounds, backgroundColour);
-            bounds.Inflate(-padding, -padding);
             this.Settings.Render.SpriteBatch.DrawFilledRectangle(this.Settings.Render.Texture, bounds, fillColour);
             bounds.Inflate(-padding, -padding);
             this.Settings.Render.SpriteBatch.DrawFilledRectangle(this.Settings.Render.Texture, bounds, backgroundColour);

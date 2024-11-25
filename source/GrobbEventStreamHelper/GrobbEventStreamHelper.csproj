@@ -35,9 +35,10 @@
     <Compile Include="Controls\ToggleButton.cs" />
     <Compile Include="Controls\ToggleButtonView.cs" />
     <Compile Include="EngineCore.cs" />
-    <Compile Include="EventStatus\ControllingFactionChangedEventArgs.cs" />
+    <Compile Include="EventStatus\FactionChangeEventArgs.cs" />
     <Compile Include="EventStatus\EventModel.cs" />
     <Compile Include="EventStatus\EventStatusTimeController.cs" />
+    <Compile Include="GlobalConstants.Colours.Factions.cs" />
     <Compile Include="Scenes\EventLive\FactionToggleButtonLayer.cs" />
     <Compile Include="TimeScale.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
