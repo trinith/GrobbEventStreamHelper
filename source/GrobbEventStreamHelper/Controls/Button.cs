@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
+using System.Security.Policy;
 
 namespace GrobbEventStreamHelper.Controls
 {
@@ -7,9 +9,32 @@ namespace GrobbEventStreamHelper.Controls
     {
         public Rectangle Bounds;
         public string Text;
-        public ButtonState State = ButtonState.UnPressed;
+        public bool IsHot { get; set; } = false;
+        public ButtonState State = ButtonState.Released;
         public object Tag = null;
 
-        public event EventHandler<EventArgs> OnClicked;
+        public event EventHandler<EventArgs> Clicked;
+        public event EventHandler<EventArgs> Pressed;
+        public event EventHandler<EventArgs> Released;
+
+        public void Press()
+        {
+            this.State = ButtonState.Pressed;
+            if (this.Pressed != null)
+                this.Pressed(this, new EventArgs());
+        }
+
+        public void Release()
+        {
+            this.State = ButtonState.Released;
+            if (this.Released != null)
+                this.Released(this, new EventArgs());
+        }
+
+        public void Click()
+        {
+            if (this.Clicked != null)
+                this.Clicked(this, new EventArgs());
+        }
     }
 }

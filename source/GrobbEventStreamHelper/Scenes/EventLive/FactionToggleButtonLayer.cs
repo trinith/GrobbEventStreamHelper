@@ -6,8 +6,10 @@ using GrobbEventStreamHelper.Controls;
 using GrobbEventStreamHelper.EventStatus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace GrobbEventStreamHelper.Scenes.EventLive
 {
@@ -64,17 +66,30 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     Tag = factionButtons[i]
                 };
                 _factionToggleButtons.Add(factionButtons[i], newButton);
+
+                newButton.Pressed += (sender, e) => { Trace.WriteLine($"Pressed ({((Button)sender).Text})"); };
+                newButton.Released += (sender, e) => { Trace.WriteLine($"Released ({((Button)sender).Text})"); };
+                newButton.Clicked += (sender, e) => { Trace.WriteLine($"Clicked ({((Button)sender).Text})"); };
+
+                this.Controllers.Add(new ButtonController(newButton));
             }
         }
 
         protected override void OnDraw(GameTime gameTime)
         {
+            // GT_TODO: Replace this with a proper view. Need to flesh some things out first though.
             foreach (Button b in _factionToggleButtons.Values)
             {
+                Color c = (b.IsHot)
+                    ? (b.State == ButtonState.Pressed)
+                        ? Color.LightGreen
+                        : Color.Green
+                    : Color.DarkGreen;
+
                 _spriteBatch.DrawRectangle(
                     _pixel,
                     b.Bounds,
-                    Color.Pink
+                    c
                 );
 
                 Point textSize = _buttonFont.MeasureString(b.Text).ToPoint();
@@ -82,7 +97,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     b.Bounds.Center.X - textSize.X / 2,
                     b.Bounds.Center.Y - textSize.Y / 2
                 );
-                _spriteBatch.DrawString(_buttonFont, b.Text, textPos.ToVector2(), Color.White);
+                _spriteBatch.DrawString(_buttonFont, b.Text, textPos.ToVector2(), c);
             }
 
             base.OnDraw(gameTime);

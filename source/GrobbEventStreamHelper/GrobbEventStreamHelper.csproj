@@ -30,7 +30,7 @@
   <ItemGroup>
     <Compile Include="Assets\AssetRepository.cs" />
     <Compile Include="Controls\Button.cs" />
-    <Compile Include="Controls\ButtonState.cs" />
+    <Compile Include="Controls\ButtonController.cs" />
     <Compile Include="EngineCore.cs" />
     <Compile Include="EventStatus\ControllingFactionChangedEventArgs.cs" />
     <Compile Include="EventStatus\EventModel.cs" />
