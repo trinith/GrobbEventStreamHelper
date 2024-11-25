@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 
 namespace GrobbEventStreamHelper.Scenes.EventLive
 {
@@ -35,6 +36,8 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             // Register components.
             _spriteBatch = this.Components.RegisterComponent(new SpriteBatch(_graphics));
             EventModel eventModel = this.Components.RegisterComponent(new EventModel(TimeSpan.FromMinutes(Constants.EventDurationMinutes)));
+            eventModel.ControllingFactionChanged += (sender, e) => Trace.WriteLine($"Controlling faction changed to {e.NewController}.");
+
             this.Components.RegisterComponent<IAssetBank>(new AssetBank());
 
             // Load content.

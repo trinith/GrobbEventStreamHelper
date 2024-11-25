@@ -26,7 +26,7 @@ namespace GrobbEventStreamHelper.Controls
 
             Color backgroundColour = _model.BackgroundColour;
             Color fillColour = _model.ForegroundColour;
-            int padding = 2;
+            int padding = 4;
 
             _spriteBatch.DrawFilledRectangle(_model.PixelTexture, bounds, backgroundColour);
             bounds.Inflate(-padding, -padding);

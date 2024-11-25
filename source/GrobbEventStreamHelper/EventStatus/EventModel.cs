@@ -15,7 +15,7 @@ namespace GrobbEventStreamHelper.EventStatus
             get { return this.ElapsedTime >= this.Duration; }
         }
 
-        public event EventHandler<ControllingFactionChangedEventArgs> OnControllingFactionChanged;
+        public event EventHandler<ControllingFactionChangedEventArgs> ControllingFactionChanged;
 
         public EventModel(TimeSpan duration)
         {
@@ -39,8 +39,8 @@ namespace GrobbEventStreamHelper.EventStatus
             Faction oldFaction = this.ControllingFaction;
             this.ControllingFaction = faction;
 
-            if (this.OnControllingFactionChanged != null)
-                this.OnControllingFactionChanged(this, new ControllingFactionChangedEventArgs(oldFaction, faction));
+            if (this.ControllingFactionChanged != null)
+                this.ControllingFactionChanged(this, new ControllingFactionChangedEventArgs(oldFaction, faction));
         }
 
         public void AddElapsedTime(TimeSpan elapsedTime)
@@ -48,10 +48,13 @@ namespace GrobbEventStreamHelper.EventStatus
             if (this.IsComplete)
                 return;
 
-            this.ElapsedTime += elapsedTime;
             if (this.ElapsedTime > this.Duration)
+            {
                 this.ElapsedTime = this.Duration;
+                return;
+            }
 
+            this.ElapsedTime += elapsedTime;
             this.ControlTime[this.ControllingFaction] += elapsedTime;
         }
     }

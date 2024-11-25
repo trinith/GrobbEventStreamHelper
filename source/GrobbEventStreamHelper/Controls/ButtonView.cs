@@ -1,0 +1,85 @@
+﻿using ArbitraryPixel.Tenvis.Core;
+using ArbitraryPixel.Tenvis.Rendering.DebugDrawing;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
+
+namespace GrobbEventStreamHelper.Controls
+{
+    public class ButtonView : ViewBase
+    {
+        public class RenderSettings
+        {
+            public SpriteBatch SpriteBatch;
+            public Texture2D Texture;
+            public SpriteFont Font;
+
+            public RenderSettings(SpriteBatch spriteBatch, Texture2D texture, SpriteFont font)
+            {
+                this.SpriteBatch = spriteBatch ?? throw new ArgumentNullException();
+                this.Texture = texture ?? throw new ArgumentNullException();
+                this.Font = font ?? throw new ArgumentNullException();
+            }
+        }
+
+        public class ColourSettings
+        {
+            public Color Normal = Color.White;
+            public Color Pressed = Color.White;
+            public Color Hot = Color.White;
+        }
+
+        private Button _button;
+        private RenderSettings _renderSettings;
+        private ColourSettings _colourSettings;
+
+        public ButtonView(Button button, RenderSettings renderSettings, ColourSettings colourSettings)
+        {
+            _button = button ?? throw new ArgumentNullException();
+            _renderSettings = renderSettings ?? throw new ArgumentNullException();
+            _colourSettings = colourSettings ?? throw new ArgumentNullException();
+        }
+
+        protected override void OnDraw(GameTime gameTime)
+        {
+            DrawButton(_button, _button.Bounds);
+
+            base.OnDraw(gameTime);
+        }
+
+        protected virtual void DrawButton(Button button, Rectangle bounds)
+        {
+            Color colour = (_button.IsHot)
+                ? (_button.State == ButtonState.Pressed)
+                    ? _colourSettings.Pressed
+                    : _colourSettings.Hot
+                : _colourSettings.Normal;
+
+            _renderSettings.SpriteBatch.DrawFilledRectangle(
+                _renderSettings.Texture,
+                bounds,
+                colour
+            );
+
+            bounds.Inflate(-4, -4);
+
+            _renderSettings.SpriteBatch.DrawFilledRectangle(
+                _renderSettings.Texture,
+                bounds,
+                Color.Black
+            );
+
+            if (!string.IsNullOrEmpty(_button.Text))
+            {
+                SpriteFont font = _renderSettings.Font;
+                Point textSize = font.MeasureString(_button.Text).ToPoint();
+                Point textPos = new Point(
+                    bounds.Center.X - textSize.X / 2,
+                    bounds.Center.Y - textSize.Y / 2
+                );
+                _renderSettings.SpriteBatch.DrawString(font, _button.Text, textPos.ToVector2(), colour);
+            }
+        }
+    }
+}
