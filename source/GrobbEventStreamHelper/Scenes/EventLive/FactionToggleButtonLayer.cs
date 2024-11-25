@@ -31,8 +31,8 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             Point screenSize = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             _spriteBatch = this.Parent.Components.GetComponent<SpriteBatch>();
-            _pixel = this.Parent.Components.GetComponent<IAssetBank>().Get<Texture2D>(AssetRepository.Textures.Pixel.Name);
-            _buttonFont = this.Parent.Components.GetComponent<IAssetBank>().Get<SpriteFont>(AssetRepository.Fonts.FactionButtonText.Name);
+            _pixel = this.Parent.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.Pixel);
+            _buttonFont = this.Parent.Components.GetComponent<IAssetBank>().Get(AssetRepository.Fonts.FactionButtonText);
 
             GenerateButtons(screenSize);
 

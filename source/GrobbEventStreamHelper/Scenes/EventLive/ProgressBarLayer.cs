@@ -38,7 +38,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             {
                 Bounds = barBounds,
                 CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
-                PixelTexture = this.Parent.Components.GetComponent<IAssetBank>().Get<Texture2D>(AssetRepository.Textures.Pixel.Name),
+                PixelTexture = this.Parent.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.Pixel),
                 ForegroundColour = Color.DarkGreen,
                 BackgroundColour = Color.Black,
             };
