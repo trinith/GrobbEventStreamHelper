@@ -41,7 +41,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             this.LoadContent();
 
             // Register Controllers.
-            this.Controllers.Add(new EventStatusTimeController(eventModel));
+            this.Controllers.Add(new EventStatusTimeController(eventModel, this.Components.TryGetComponent<TimeScale>()));
 
             // Register child scenes.
             this.CreateChild<ProgressBarLayer>(eventModel);

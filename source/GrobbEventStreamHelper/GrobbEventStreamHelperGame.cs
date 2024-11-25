@@ -1,8 +1,5 @@
 ﻿using ArbitraryPixel.Tenvis.Core;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace GrobbEventStreamHelper
 {
@@ -28,6 +25,9 @@ namespace GrobbEventStreamHelper
             IComponentContainer components = new SimpleComponentContainer();
             components.RegisterComponent(_graphics);
             components.RegisterComponent(this.Content);
+#if DEBUG
+            //components.RegisterComponent(new TimeScale() { Value = 100.0 });
+#endif
 
             _engine = new EngineCore(components);
 

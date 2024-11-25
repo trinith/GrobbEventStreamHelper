@@ -6,18 +6,18 @@ namespace GrobbEventStreamHelper.EventStatus
 {
     public class EventStatusTimeController : ControllerBase
     {
-        public EventModel _model;
+        private EventModel _model;
+        private TimeScale _timeScale;
 
-        public double TimeScale { get; set; } = 1.0;
-
-        public EventStatusTimeController(EventModel model)
+        public EventStatusTimeController(EventModel model, TimeScale timeScale)
         {
             _model = model ?? throw new ArgumentNullException();
+            _timeScale = timeScale ?? new TimeScale();
         }
 
         protected override void OnUpdate(GameTime gameTime)
         {
-            _model.AddElapsedTime(gameTime.ElapsedGameTime * this.TimeScale);
+            _model.AddElapsedTime(gameTime.ElapsedGameTime * _timeScale.Value);
             base.OnUpdate(gameTime);
         }
     }

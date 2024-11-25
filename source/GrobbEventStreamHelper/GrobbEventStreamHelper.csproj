@@ -33,12 +33,14 @@
     <Compile Include="EventStatus\ControllingFactionChangedEventArgs.cs" />
     <Compile Include="EventStatus\EventModel.cs" />
     <Compile Include="EventStatus\EventStatusTimeController.cs" />
+    <Compile Include="TimeScale.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
     <Compile Include="EventStatus\Faction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Scenes\EventLive\ProgressBarLayer.cs" />
+    <Compile Include="Controls\ProgressBarModel.cs" />
     <Compile Include="Scenes\EventLive\RootScene_EventLive.cs" />
-    <Compile Include="Scenes\EventLive\ProgressView.cs" />
+    <Compile Include="Controls\ProgressBarView.cs" />
     <Compile Include="Scenes\RootSceneId.cs" />
   </ItemGroup>
   <ItemGroup>
