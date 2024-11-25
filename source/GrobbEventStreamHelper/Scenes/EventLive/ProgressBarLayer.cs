@@ -30,6 +30,11 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             GraphicsDeviceManager graphics = this.Parent.Components.GetComponent<GraphicsDeviceManager>();
             SpriteBatch spriteBatch = this.Parent.Components.GetComponent<SpriteBatch>();
 
+            ProgressBarView.RenderSettings renderSettings = new ProgressBarView.RenderSettings(
+                this.Parent.Components.GetComponent<SpriteBatch>(),
+                this.Parent.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.Pixel)
+            );
+
             Point screenSize = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Point padding = new Point(8, 8);
             Rectangle barBounds = new Rectangle(padding.X, padding.Y, screenSize.X - padding.X * 2, Constants.ProgressHeight);
@@ -38,16 +43,18 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             {
                 Bounds = barBounds,
                 CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
-                PixelTexture = this.Parent.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.Pixel),
-                ForegroundColour = Color.DarkGreen,
-                BackgroundColour = Color.Black,
             };
 
             // Event duration progress.
             this.Views.Add(
                 new ProgressBarView(
                     _durationProgressBar,
-                    spriteBatch
+                    renderSettings,
+                    new ProgressBarView.ColourSettings()
+                    {
+                        Background = Color.Black,
+                        Foreground = Color.Green,
+                    }
                 )
             );
 

@@ -45,7 +45,7 @@ namespace GrobbEventStreamHelper.Controls
 
         private Button _button;
 
-        protected ViewSettings Settings;
+        protected ViewSettings Settings { get; private set; }
 
         public ButtonView(Button button, RenderSettings renderSettings, ColourSettings colourSettings)
         {
