@@ -1,5 +1,4 @@
 ﻿using ArbitraryPixel.Tenvis.Assets.AssetDescriptors;
-using ArbitraryPixel.Tenvis.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
