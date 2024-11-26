@@ -78,7 +78,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
         protected override void OnDrawBegin(GameTime gameTIme)
         {
-            _graphics.Clear(Color.Black);
+            _graphics.Clear(Color.DarkMagenta);
             _spriteBatch.Begin();
 
             base.OnDrawBegin(gameTIme);

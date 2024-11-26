@@ -13,7 +13,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
     {
         public static class Constants
         {
-            public static int ProgressHeight = 50;
+            public static int ProgressHeight = 52;
         }
 
         private EventModel _model;

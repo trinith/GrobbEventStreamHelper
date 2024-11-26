@@ -65,9 +65,18 @@ namespace GrobbEventStreamHelper.Controls
                 ? MathHelper.Clamp((float)_model.CurrentProgress(), 0, 1)
                 : 1.0;
 
+            // Background border.            
+            spriteBatch.DrawFilledRectangle(pixel, bounds, bgColour);
+
+            // Border fill.
+            bounds.Inflate(-padding/2, -padding/2);
             spriteBatch.DrawFilledRectangle(pixel, bounds, fgColour);
+
+            // Interior fill.
             bounds.Inflate(-padding, -padding);
             spriteBatch.DrawFilledRectangle(pixel, bounds, bgColour);
+            
+            // Progress fill.
             bounds.Inflate(-padding, -padding);
             spriteBatch.DrawFilledRectangle(
                 pixel,
@@ -79,6 +88,7 @@ namespace GrobbEventStreamHelper.Controls
                 fgColour
             );
 
+            // Left label.
             string leftLabel = (_model.LeftLabel != null) ? _model.LeftLabel() : string.Empty;
             if (!string.IsNullOrEmpty(leftLabel))
             {
@@ -96,6 +106,7 @@ namespace GrobbEventStreamHelper.Controls
                 spriteBatch.DrawString(font, leftLabel, textBounds.Location.ToVector2() + new Vector2(textPadding / 2f, textPadding / 2f), fgColour);
             }
 
+            // Right label.
             string rightLabel = (_model.RightLabel != null) ? _model.RightLabel() : string.Empty;
             if (!string.IsNullOrEmpty(rightLabel))
             {
