@@ -7,6 +7,7 @@ namespace GrobbEventStreamHelper.Controls
         public delegate double CurrentProgressFunction();
 
         public Rectangle Bounds;
+        public string Text;
         public CurrentProgressFunction CurrentProgress;
     }
 }

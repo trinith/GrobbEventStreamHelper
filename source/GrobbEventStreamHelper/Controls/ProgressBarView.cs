@@ -13,11 +13,13 @@ namespace GrobbEventStreamHelper.Controls
         {
             public SpriteBatch SpriteBatch;
             public Texture2D Texture;
+            public SpriteFont Font;
 
-            public RenderSettings(SpriteBatch spriteBatch, Texture2D texture)
+            public RenderSettings(SpriteBatch spriteBatch, Texture2D texture, SpriteFont font)
             {
                 this.SpriteBatch = spriteBatch ?? throw new ArgumentNullException();
                 this.Texture = texture ?? throw new ArgumentNullException();
+                this.Font = font ?? throw new ArgumentNullException();
             }
         }
 
@@ -52,25 +54,44 @@ namespace GrobbEventStreamHelper.Controls
         {
             Rectangle bounds = _model.Bounds;
 
-            Color backgroundColour = this.Settings.Colour.Background;
-            Color fillColour = this.Settings.Colour.Foreground;
+            Color bgColour = this.Settings.Colour.Background;
+            Color fgColour = this.Settings.Colour.Foreground;
+            SpriteBatch spriteBatch = this.Settings.Render.SpriteBatch;
+            Texture2D pixel = this.Settings.Render.Texture;
+
             int padding = 4;
 
-            this.Settings.Render.SpriteBatch.DrawFilledRectangle(this.Settings.Render.Texture, bounds, fillColour);
+            spriteBatch.DrawFilledRectangle(pixel, bounds, fgColour);
             bounds.Inflate(-padding, -padding);
-            this.Settings.Render.SpriteBatch.DrawFilledRectangle(this.Settings.Render.Texture, bounds, backgroundColour);
+            spriteBatch.DrawFilledRectangle(pixel, bounds, bgColour);
             bounds.Inflate(-padding, -padding);
-            this.Settings.Render.SpriteBatch.DrawFilledRectangle(
-                this.Settings.Render.Texture,
+            spriteBatch.DrawFilledRectangle(
+                pixel,
                 bounds.Location.ToVector2(),
                 new Vector2(
                     (float)(bounds.Width * _model.CurrentProgress()),
                     bounds.Height
                 ),
-                fillColour
+                fgColour
             );
 
-            // GT_TODO: Draw a label over the bar showing whatever text we get from a get text function we put on Settings.
+            if (!string.IsNullOrEmpty(_model.Text))
+            {
+                SpriteFont font = this.Settings.Render.Font;
+                int textPadding = 4;
+                Point textSize = font.MeasureString(_model.Text).ToPoint();
+                Rectangle textBounds = new Rectangle(
+                    bounds.Left + 8,
+                    bounds.Top + bounds.Height / 2 - textSize.Y / 2,
+                    textSize.X + textPadding,
+                    textSize.Y + textPadding - textPadding
+                );
+
+                spriteBatch.DrawFilledRectangle(pixel, textBounds, bgColour);
+                spriteBatch.DrawString(font, _model.Text, textBounds.Location.ToVector2() + new Vector2(textPadding / 2f, textPadding / 2f), fgColour);
+            }
+
+            // GT_TODO: Consider adding a supplementary label on the right side, to show duration or control time?
 
             base.OnDraw(gameTime);
         }

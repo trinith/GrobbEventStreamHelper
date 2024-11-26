@@ -60,6 +60,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
             assetBank.Put(AssetRepository.Textures.Pixel, _graphics);
             assetBank.Put(contentManager, AssetRepository.Fonts.FactionButtonText);
+            assetBank.Put(contentManager, AssetRepository.Fonts.ProgressBarText);
         }
 
         protected override void OnUninitialize()

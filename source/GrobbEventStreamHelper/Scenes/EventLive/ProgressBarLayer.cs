@@ -28,9 +28,11 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             GraphicsDeviceManager graphics = this.Parent.Components.GetComponent<GraphicsDeviceManager>();
             SpriteBatch spriteBatch = this.Parent.Components.GetComponent<SpriteBatch>();
 
+            IAssetBank assetBank = this.Parent.Components.GetComponent<IAssetBank>();
             ProgressBarView.RenderSettings renderSettings = new ProgressBarView.RenderSettings(
                 this.Parent.Components.GetComponent<SpriteBatch>(),
-                this.Parent.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.Pixel)
+                assetBank.Get(AssetRepository.Textures.Pixel),
+                assetBank.Get(AssetRepository.Fonts.ProgressBarText)
             );
 
             Point screenSize = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
@@ -43,6 +45,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
+                        Text = "Duration",
                         CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
                     },
                     renderSettings,
@@ -61,6 +64,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
+                        Text = Faction.Neutral.ToString(),
                         CurrentProgress = () => { return _model.ControlTime[Faction.Neutral] / _model.ControlTime[_model.WinningFaction]; },
                     },
                     renderSettings,
@@ -79,6 +83,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
+                        Text = Faction.Alliance.ToString(),
                         CurrentProgress = () => { return _model.ControlTime[Faction.Alliance] / _model.ControlTime[_model.WinningFaction]; },
                     },
                     renderSettings,
@@ -97,6 +102,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
+                        Text = Faction.Horde.ToString(),
                         CurrentProgress = () => { return _model.ControlTime[Faction.Horde] / _model.ControlTime[_model.WinningFaction]; },
                     },
                     renderSettings,

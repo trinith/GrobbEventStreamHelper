@@ -29,6 +29,7 @@ namespace GrobbEventStreamHelper.Assets
         public static class Fonts
         {
             public static BasicAssetDescriptor<SpriteFont> FactionButtonText => new BasicAssetDescriptor<SpriteFont>("FactionButtonText", @"Fonts\FactionButtonText");
+            public static BasicAssetDescriptor<SpriteFont> ProgressBarText => new BasicAssetDescriptor<SpriteFont>("ProgressBarText", @"Fonts\ProgressBarText");
         }
     }
 }
