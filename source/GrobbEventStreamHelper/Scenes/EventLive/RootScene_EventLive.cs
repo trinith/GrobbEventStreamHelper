@@ -21,6 +21,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
         private GraphicsDevice _graphics;
         private SpriteBatch _spriteBatch;
+        private Texture2D _backdrop;
 
         public RootScene_EventLive(IComponentContainer components)
         {
@@ -43,8 +44,19 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             // Load content.
             this.LoadContent();
 
+            _backdrop = this.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.FerelasBackground);
+
             // Register Controllers.
             this.Controllers.Add(new EventStatusTimeController(eventModel, this.Components.TryGetComponent<TimeScale>()));
+
+            this.Views.Add(
+                new GenericView(
+                    (elapsedTime) =>
+                    {
+                        _spriteBatch.Draw(_backdrop, Vector2.Zero, Color.White);
+                    }
+                )
+            );
 
             // Register child scenes.
             this.CreateChild<ProgressBarLayer>(eventModel);
@@ -61,6 +73,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
 
             assetBank.Put(AssetRepository.Textures.Pixel, _graphics);
             assetBank.Put(contentManager, AssetRepository.Fonts.FactionButtonText);
+            assetBank.Put(contentManager, AssetRepository.Textures.FerelasBackground);
             assetBank.Put(contentManager, AssetRepository.Fonts.ProgressBarText);
             assetBank.Put(contentManager, AssetRepository.SpriteSheets.FactionIcons);
         }
