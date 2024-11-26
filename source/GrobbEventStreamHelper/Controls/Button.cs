@@ -10,6 +10,8 @@ namespace GrobbEventStreamHelper.Controls
         public string Text;
         public bool IsHot { get; set; } = false;
         public ButtonState State = ButtonState.Released;
+        public bool Enabled { get; set; } = true;
+        public bool Visible { get; set; } = true;
         public object Tag = null;
 
         public event EventHandler<EventArgs> Clicked;

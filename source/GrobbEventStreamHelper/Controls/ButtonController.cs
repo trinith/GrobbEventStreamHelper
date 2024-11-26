@@ -19,6 +19,9 @@ namespace GrobbEventStreamHelper.Controls
 
         protected override void OnUpdate(GameTime gameTime)
         {
+            if (!_button.Enabled)
+                return;
+
             MouseState currentState = Mouse.GetState();
 
             _button.IsHot = _button.Bounds.Contains(currentState.Position);

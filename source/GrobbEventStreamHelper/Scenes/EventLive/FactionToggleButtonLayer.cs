@@ -72,7 +72,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             Faction[] factionButtons = { Faction.Alliance, Faction.Neutral, Faction.Horde };
 
             Point padding = new Point(8, 8);
-            Point buttonSize = new Point(150, 100);
+            Point buttonSize = GlobalConstants.Interface.ButtonSize;
             Point anchor = new Point(
                 screenSize.X / 2 - (factionButtons.Length * buttonSize.X + (factionButtons.Length - 1) * padding.X) / 2,
                 screenSize.Y - buttonSize.Y - padding.Y

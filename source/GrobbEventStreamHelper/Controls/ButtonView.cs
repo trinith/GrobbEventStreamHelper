@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using static GrobbEventStreamHelper.Controls.ButtonView;
 
 namespace GrobbEventStreamHelper.Controls
 {
@@ -34,7 +33,7 @@ namespace GrobbEventStreamHelper.Controls
         protected class ViewSettings
         {
             public RenderSettings Render { get; private set; }
-            public ColourSettings Colour { get; private set; }
+            public ColourSettings Colour { get; set; }
 
             public ViewSettings(RenderSettings renderSettings, ColourSettings colourSettings)
             {
@@ -46,6 +45,11 @@ namespace GrobbEventStreamHelper.Controls
         private Button _button;
 
         protected ViewSettings Settings { get; private set; }
+        public ColourSettings Colours
+        {
+            get { return this.Settings.Colour; }
+            set { this.Settings.Colour = value; }
+        }
 
         public ButtonView(Button button, RenderSettings renderSettings, ColourSettings colourSettings)
         {
@@ -55,6 +59,9 @@ namespace GrobbEventStreamHelper.Controls
 
         protected override void OnDraw(GameTime gameTime)
         {
+            if (!_button.Visible)
+                return;
+
             Color activeColour = (_button.IsHot)
                 ? (_button.State == ButtonState.Pressed)
                     ? this.Settings.Colour.Pressed

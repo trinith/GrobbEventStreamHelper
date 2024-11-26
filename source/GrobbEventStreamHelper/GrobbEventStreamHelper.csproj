@@ -38,12 +38,16 @@
     <Compile Include="EventStatus\FactionChangeEventArgs.cs" />
     <Compile Include="EventStatus\EventModel.cs" />
     <Compile Include="EventStatus\EventStatusTimeController.cs" />
-    <Compile Include="GlobalConstants.Colours.Factions.cs" />
+    <Compile Include="GlobalConstants\GlobalConstants.Colours.Factions.cs" />
+    <Compile Include="GlobalConstants\GlobalConstants.Event.cs" />
+    <Compile Include="GlobalConstants\GlobalConstants.Interface.cs" />
     <Compile Include="Scenes\EventLive\FactionIcon.cs" />
     <Compile Include="Scenes\EventLive\FactionIconAlphaFadeController.cs" />
     <Compile Include="Scenes\EventLive\FactionIconLayer.cs" />
     <Compile Include="Scenes\EventLive\FactionIconView.cs" />
     <Compile Include="Scenes\EventLive\FactionToggleButtonLayer.cs" />
+    <Compile Include="Scenes\Intro\InfoLayer.cs" />
+    <Compile Include="Scenes\Intro\RootScene_Intro.cs" />
     <Compile Include="TimeScale.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
     <Compile Include="EventStatus\Faction.cs" />

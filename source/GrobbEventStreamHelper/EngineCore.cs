@@ -15,12 +15,13 @@ namespace GrobbEventStreamHelper
             this.Components.CopyRegisteredComponents(components);
             this.Components.RegisterComponent(_sceneManager);
 
+            _sceneManager.RegisterScene(RootSceneId.Intro, new RootScene_Intro(this.Components));
             _sceneManager.RegisterScene(RootSceneId.EventLive, new RootScene_EventLive(this.Components));
         }
 
         protected override void OnLoadContent()
         {
-            _sceneManager.SetScene(RootSceneId.EventLive);
+            _sceneManager.SetScene(RootSceneId.Intro);
             base.OnLoadContent();
         }
 
