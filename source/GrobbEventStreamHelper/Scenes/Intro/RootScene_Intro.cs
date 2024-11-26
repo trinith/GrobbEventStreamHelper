@@ -6,6 +6,7 @@ using GrobbEventStreamHelper.Scenes.Intro;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace GrobbEventStreamHelper.Scenes
@@ -114,6 +115,10 @@ namespace GrobbEventStreamHelper.Scenes
         {
             DateTime now = DateTime.Now;
             if (_goButton.Enabled == false && (GlobalConstants.Event.StartTime - now).TotalMinutes < 5)
+                EnableGoButton();
+
+            KeyboardState keyState = Keyboard.GetState();
+            if (keyState.IsKeyDown(Keys.LeftControl) && keyState.IsKeyDown(Keys.LeftAlt) && keyState.IsKeyDown(Keys.G))
                 EnableGoButton();
 
             base.OnFixedUpdate(gameTime);
