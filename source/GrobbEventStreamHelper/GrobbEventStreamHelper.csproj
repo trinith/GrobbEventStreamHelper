@@ -39,7 +39,10 @@
     <Compile Include="EventStatus\EventModel.cs" />
     <Compile Include="EventStatus\EventStatusTimeController.cs" />
     <Compile Include="GlobalConstants.Colours.Factions.cs" />
+    <Compile Include="Scenes\EventLive\FactionIcon.cs" />
+    <Compile Include="Scenes\EventLive\FactionIconAlphaFadeController.cs" />
     <Compile Include="Scenes\EventLive\FactionIconLayer.cs" />
+    <Compile Include="Scenes\EventLive\FactionIconView.cs" />
     <Compile Include="Scenes\EventLive\FactionToggleButtonLayer.cs" />
     <Compile Include="TimeScale.cs" />
     <Compile Include="GrobbEventStreamHelperGame.cs" />
