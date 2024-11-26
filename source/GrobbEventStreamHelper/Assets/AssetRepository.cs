@@ -10,6 +10,7 @@ namespace GrobbEventStreamHelper.Assets
         public static class Textures
         {
             public static CustomAssetDescriptor<Texture2D> Pixel => new CustomAssetDescriptor<Texture2D>("PixelTexture", CreatePixelTexture);
+            public static BasicAssetDescriptor<Texture2D> FactionIcons => new BasicAssetDescriptor<Texture2D>("FactionIcons", @"Textures\FactionIcons");
 
             private static Texture2D CreatePixelTexture(params object[] parameters)
             {
@@ -30,6 +31,11 @@ namespace GrobbEventStreamHelper.Assets
         {
             public static BasicAssetDescriptor<SpriteFont> FactionButtonText => new BasicAssetDescriptor<SpriteFont>("FactionButtonText", @"Fonts\FactionButtonText");
             public static BasicAssetDescriptor<SpriteFont> ProgressBarText => new BasicAssetDescriptor<SpriteFont>("ProgressBarText", @"Fonts\ProgressBarText");
+        }
+
+        public static class SpriteSheets
+        {
+            public static SpriteSheetAssetDescriptor FactionIcons => new SpriteSheetAssetDescriptor("FactionIcons", Textures.FactionIcons, new Point(256, 256));
         }
     }
 }

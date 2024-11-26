@@ -49,6 +49,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             // Register child scenes.
             this.CreateChild<ProgressBarLayer>(eventModel);
             this.CreateChild<FactionToggleButtonLayer>(eventModel);
+            this.CreateChild<FactionIconLayer>(eventModel);
 
             base.OnInitialize();
         }
@@ -61,6 +62,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             assetBank.Put(AssetRepository.Textures.Pixel, _graphics);
             assetBank.Put(contentManager, AssetRepository.Fonts.FactionButtonText);
             assetBank.Put(contentManager, AssetRepository.Fonts.ProgressBarText);
+            assetBank.Put(contentManager, AssetRepository.SpriteSheets.FactionIcons);
         }
 
         protected override void OnUninitialize()

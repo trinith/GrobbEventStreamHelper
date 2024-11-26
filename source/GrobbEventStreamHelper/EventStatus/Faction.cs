@@ -2,7 +2,7 @@
 {
     public enum Faction
     {
-        Neutral,
+        Neutral = 0,
         Alliance,
         Horde,
     }
