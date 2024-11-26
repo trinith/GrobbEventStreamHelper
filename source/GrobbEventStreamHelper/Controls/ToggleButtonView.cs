@@ -1,5 +1,7 @@
 ﻿using ArbitraryPixel.Tenvis.Rendering.DebugDrawing;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1.Effects;
 
 namespace GrobbEventStreamHelper.Controls
 {
@@ -10,47 +12,38 @@ namespace GrobbEventStreamHelper.Controls
         {
         }
 
-        protected override void DrawButton(Button button, Rectangle bounds)
+        protected override void DrawButton(Button button, Rectangle bounds, Color activeColour)
         {
             ToggleButton toggleButton = (ToggleButton)button;
 
+            int padding = 2;
+
             if (toggleButton.IsActive)
             {
-                Color activteIconColour = this.Settings.Colour.Normal;
+                SpriteBatch spriteBatch = this.Settings.Render.SpriteBatch;
+                Texture2D texture = this.Settings.Render.Texture;
 
-                this.Settings.Render.SpriteBatch.DrawFilledRectangle(
-                    this.Settings.Render.Texture,
-                    bounds,
-                    activteIconColour
-                );
+                int indicatorSize = MathHelper.Min(bounds.Width, bounds.Height) / 4;
+                Rectangle[] indicatorRects =
+                {
+                    new Rectangle(bounds.Left, bounds.Top, indicatorSize, indicatorSize),
+                    new Rectangle(bounds.Left, bounds.Bottom - indicatorSize, indicatorSize, indicatorSize),
+                    new Rectangle(bounds.Right - indicatorSize, bounds.Top, indicatorSize, indicatorSize),
+                    new Rectangle(bounds.Right - indicatorSize, bounds.Bottom - indicatorSize, indicatorSize, indicatorSize),
+                };
 
-                int maskSize = MathHelper.Min(bounds.Width, bounds.Height) / 4;
-
-                this.Settings.Render.SpriteBatch.DrawFilledRectangle(
-                    this.Settings.Render.Texture,
-                    new Rectangle(
-                        bounds.Left,
-                        bounds.Top + maskSize,
-                        bounds.Width,
-                        bounds.Height - maskSize * 2
-                    ),
-                    Color.Black
-                );
-
-                this.Settings.Render.SpriteBatch.DrawFilledRectangle(
-                    this.Settings.Render.Texture,
-                    new Rectangle(
-                        bounds.Left + maskSize,
-                        bounds.Top,
-                        bounds.Width - maskSize * 2,
-                        bounds.Height
-                    ),
-                    Color.Black
-                );
+                foreach (Rectangle indicatorRect in indicatorRects)
+                {
+                    spriteBatch.Draw(texture, indicatorRect, Color.Black);
+                    indicatorRect.Inflate(-padding, -padding);
+                    spriteBatch.Draw(texture, indicatorRect, activeColour);
+                }
             }
-            bounds.Inflate(-4, -4);
 
-            base.DrawButton(button, bounds);
+            padding *= 2;
+            bounds.Inflate(-padding, -padding);
+
+            base.DrawButton(button, bounds, activeColour);
         }
     }
 }

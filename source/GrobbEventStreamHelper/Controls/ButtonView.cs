@@ -55,23 +55,31 @@ namespace GrobbEventStreamHelper.Controls
 
         protected override void OnDraw(GameTime gameTime)
         {
-            DrawButton(_button, _button.Bounds);
-
-            base.OnDraw(gameTime);
-        }
-
-        protected virtual void DrawButton(Button button, Rectangle bounds)
-        {
-            Color colour = (_button.IsHot)
+            Color activeColour = (_button.IsHot)
                 ? (_button.State == ButtonState.Pressed)
                     ? this.Settings.Colour.Pressed
                     : this.Settings.Colour.Hot
                 : this.Settings.Colour.Normal;
 
+            DrawButton(_button, _button.Bounds, activeColour);
+
+            base.OnDraw(gameTime);
+        }
+
+        protected virtual void DrawButton(Button button, Rectangle bounds, Color activeColour)
+        {
             this.Settings.Render.SpriteBatch.DrawFilledRectangle(
                 this.Settings.Render.Texture,
                 bounds,
-                colour
+                Color.Black
+            );
+
+            bounds.Inflate(-2, -2);
+
+            this.Settings.Render.SpriteBatch.DrawFilledRectangle(
+                this.Settings.Render.Texture,
+                bounds,
+                activeColour
             );
 
             bounds.Inflate(-4, -4);
@@ -90,7 +98,7 @@ namespace GrobbEventStreamHelper.Controls
                     bounds.Center.X - textSize.X / 2,
                     bounds.Center.Y - textSize.Y / 2
                 );
-                this.Settings.Render.SpriteBatch.DrawString(font, _button.Text, textPos.ToVector2(), colour);
+                this.Settings.Render.SpriteBatch.DrawString(font, _button.Text, textPos.ToVector2(), activeColour);
             }
         }
     }
