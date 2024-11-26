@@ -76,14 +76,12 @@ namespace GrobbEventStreamHelper.EventStatus
             if (this.IsComplete)
                 return;
 
-            if (this.ElapsedTime > this.Duration)
-            {
-                this.ElapsedTime = this.Duration;
-                return;
-            }
-
+            TimeSpan oldTime = this.ElapsedTime;
             this.ElapsedTime += elapsedTime;
-            this.ControlTime[this.ControllingFaction] += elapsedTime;
+            if (this.ElapsedTime > this.Duration)
+                this.ElapsedTime = this.Duration;
+
+            this.ControlTime[this.ControllingFaction] += (this.ElapsedTime - oldTime);
 
             if (this.ControllingFaction != this.WinningFaction && this.ControlTime[this.ControllingFaction] > this.ControlTime[this.WinningFaction])
                 this.WinningFaction = this.ControllingFaction;

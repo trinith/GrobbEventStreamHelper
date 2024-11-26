@@ -61,6 +61,10 @@ namespace GrobbEventStreamHelper.Controls
 
             int padding = 4;
 
+            double progress = (_model.CurrentProgress != null)
+                ? MathHelper.Clamp((float)_model.CurrentProgress(), 0, 1)
+                : 1.0;
+
             spriteBatch.DrawFilledRectangle(pixel, bounds, fgColour);
             bounds.Inflate(-padding, -padding);
             spriteBatch.DrawFilledRectangle(pixel, bounds, bgColour);
@@ -69,26 +73,44 @@ namespace GrobbEventStreamHelper.Controls
                 pixel,
                 bounds.Location.ToVector2(),
                 new Vector2(
-                    (float)(bounds.Width * _model.CurrentProgress()),
+                    (float)(bounds.Width * progress),
                     bounds.Height
                 ),
                 fgColour
             );
 
-            if (!string.IsNullOrEmpty(_model.Text))
+            string leftLabel = (_model.LeftLabel != null) ? _model.LeftLabel() : string.Empty;
+            if (!string.IsNullOrEmpty(leftLabel))
             {
                 SpriteFont font = this.Settings.Render.Font;
                 int textPadding = 4;
-                Point textSize = font.MeasureString(_model.Text).ToPoint();
+                Point textSize = font.MeasureString(leftLabel).ToPoint();
                 Rectangle textBounds = new Rectangle(
-                    bounds.Left + 8,
+                    bounds.Left + textPadding,
                     bounds.Top + bounds.Height / 2 - textSize.Y / 2,
                     textSize.X + textPadding,
                     textSize.Y + textPadding - textPadding
                 );
 
                 spriteBatch.DrawFilledRectangle(pixel, textBounds, bgColour);
-                spriteBatch.DrawString(font, _model.Text, textBounds.Location.ToVector2() + new Vector2(textPadding / 2f, textPadding / 2f), fgColour);
+                spriteBatch.DrawString(font, leftLabel, textBounds.Location.ToVector2() + new Vector2(textPadding / 2f, textPadding / 2f), fgColour);
+            }
+
+            string rightLabel = (_model.RightLabel != null) ? _model.RightLabel() : string.Empty;
+            if (!string.IsNullOrEmpty(rightLabel))
+            {
+                SpriteFont font = this.Settings.Render.Font;
+                int textPadding = 4;
+                Point textSize = font.MeasureString(rightLabel).ToPoint();
+                Rectangle textBounds = new Rectangle(
+                    bounds.Right - textPadding * 2 - textSize.X,
+                    bounds.Top + bounds.Height / 2 - textSize.Y / 2,
+                    textSize.X + textPadding,
+                    textSize.Y + textPadding - textPadding
+                );
+
+                spriteBatch.DrawFilledRectangle(pixel, textBounds, bgColour);
+                spriteBatch.DrawString(font, rightLabel, textBounds.Location.ToVector2() + new Vector2(textPadding / 2f, textPadding / 2f), fgColour);
             }
 
             // GT_TODO: Consider adding a supplementary label on the right side, to show duration or control time?

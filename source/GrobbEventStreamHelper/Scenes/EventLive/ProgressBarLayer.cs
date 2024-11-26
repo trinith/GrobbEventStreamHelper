@@ -45,7 +45,8 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
-                        Text = "Duration",
+                        LeftLabel = () => "Duration",
+                        RightLabel = () => $"{_model.ElapsedTime.TotalMinutes.ToString("00")}:{_model.ElapsedTime.Seconds.ToString("00")} / {_model.Duration.TotalMinutes.ToString("00")}:{_model.Duration.Seconds.ToString("00")}",
                         CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
                     },
                     renderSettings,
@@ -64,7 +65,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
-                        Text = Faction.Neutral.ToString(),
+                        LeftLabel = () => Faction.Neutral.ToString(),
                         CurrentProgress = () => { return _model.ControlTime[Faction.Neutral] / _model.ControlTime[_model.WinningFaction]; },
                     },
                     renderSettings,
@@ -83,7 +84,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
-                        Text = Faction.Alliance.ToString(),
+                        LeftLabel = () => Faction.Alliance.ToString(),
                         CurrentProgress = () => { return _model.ControlTime[Faction.Alliance] / _model.ControlTime[_model.WinningFaction]; },
                     },
                     renderSettings,
@@ -102,7 +103,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     new ProgressBar()
                     {
                         Bounds = bounds,
-                        Text = Faction.Horde.ToString(),
+                        LeftLabel = () => Faction.Horde.ToString(),
                         CurrentProgress = () => { return _model.ControlTime[Faction.Horde] / _model.ControlTime[_model.WinningFaction]; },
                     },
                     renderSettings,
