@@ -17,6 +17,7 @@ namespace GrobbEventStreamHelper
 
             _sceneManager.RegisterScene(RootSceneId.Intro, new RootScene_Intro(this.Components));
             _sceneManager.RegisterScene(RootSceneId.EventLive, new RootScene_EventLive(this.Components));
+            // GT_TODO: Really need an end of game screen showing the score summary. Will need to move EventModel out to here and pass it into the EventLive scene on creation.
         }
 
         protected override void OnLoadContent()

@@ -102,6 +102,7 @@ namespace GrobbEventStreamHelper.Scenes
             assetBank.Put(AssetRepository.Textures.Pixel, _graphics.GraphicsDevice);
             assetBank.Put(contentManager, AssetRepository.Fonts.FactionButtonText);
             assetBank.Put(contentManager, AssetRepository.Textures.FerelasBackground);
+            assetBank.Put(contentManager, AssetRepository.Textures.WetlandsBackground);
             assetBank.Put(contentManager, AssetRepository.Fonts.ProgressBarText);
         }
 
@@ -130,7 +131,7 @@ namespace GrobbEventStreamHelper.Scenes
             _spriteBatch.Begin();
 
             IAssetBank assetBank = this.Components.GetComponent<IAssetBank>();
-            _spriteBatch.Draw(assetBank.Get(AssetRepository.Textures.FerelasBackground), Vector2.Zero, Color.White);
+            _spriteBatch.Draw(assetBank.Get(AssetRepository.Textures.WetlandsBackground), Vector2.Zero, Color.White);
 
             base.OnDrawBegin(gameTIme);
         }

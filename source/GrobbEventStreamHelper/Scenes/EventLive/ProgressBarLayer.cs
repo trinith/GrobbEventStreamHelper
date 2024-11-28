@@ -46,6 +46,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
                     {
                         Bounds = bounds,
                         LeftLabel = () => "Duration",
+                        // GT_TODO: There's a bug with this label, it reports an extra minute as we reach the end of the event. Look into this!
                         RightLabel = () => $"{_model.ElapsedTime.TotalMinutes.ToString("00")}:{_model.ElapsedTime.Seconds.ToString("00")} / {_model.Duration.TotalMinutes.ToString("00")}:{_model.Duration.Seconds.ToString("00")}",
                         CurrentProgress = () => { return _model.ElapsedTime.TotalSeconds / _model.Duration.TotalSeconds; },
                     },

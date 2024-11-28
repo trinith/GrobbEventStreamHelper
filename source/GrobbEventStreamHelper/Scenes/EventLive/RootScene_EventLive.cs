@@ -44,7 +44,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             // Load content.
             this.LoadContent();
 
-            _backdrop = this.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.FerelasBackground);
+            _backdrop = this.Components.GetComponent<IAssetBank>().Get(AssetRepository.Textures.WetlandsBackground);
 
             // Register Controllers.
             this.Controllers.Add(new EventStatusTimeController(eventModel, this.Components.TryGetComponent<TimeScale>()));
@@ -74,6 +74,7 @@ namespace GrobbEventStreamHelper.Scenes.EventLive
             assetBank.Put(AssetRepository.Textures.Pixel, _graphics);
             assetBank.Put(contentManager, AssetRepository.Fonts.FactionButtonText);
             assetBank.Put(contentManager, AssetRepository.Textures.FerelasBackground);
+            assetBank.Put(contentManager, AssetRepository.Textures.WetlandsBackground);
             assetBank.Put(contentManager, AssetRepository.Fonts.ProgressBarText);
             assetBank.Put(contentManager, AssetRepository.SpriteSheets.FactionIcons);
         }
