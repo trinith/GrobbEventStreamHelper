@@ -11,7 +11,7 @@ namespace GrobbEventStreamHelper
         {
             public static string Name { get; private set; } = "Blood and Beard";
             public static DateTime StartTime { get; private set; } = new DateTime(new DateOnly(2024, 11, 30), new TimeOnly(13, 00));
-            public static BasicAssetDescriptor<Texture2D> BackgroundAsset = AssetRepository.Textures.WetlandsBackground;
+            public static BasicAssetDescriptor<Texture2D> BackgroundAsset = AssetRepository.Textures.StonetalonBackground;
         }
     }
 }
