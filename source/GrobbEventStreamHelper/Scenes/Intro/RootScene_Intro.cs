@@ -118,7 +118,7 @@ namespace GrobbEventStreamHelper.Scenes
                 EnableGoButton();
 
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.LeftControl) && keyState.IsKeyDown(Keys.LeftAlt) && keyState.IsKeyDown(Keys.G))
+            if (keyState.IsKeyDown(Keys.LeftControl) && keyState.IsKeyDown(Keys.LeftShift) && keyState.IsKeyDown(Keys.G))
                 EnableGoButton();
 
             base.OnFixedUpdate(gameTime);
