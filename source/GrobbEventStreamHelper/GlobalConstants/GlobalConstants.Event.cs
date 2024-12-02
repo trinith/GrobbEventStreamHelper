@@ -10,8 +10,8 @@ namespace GrobbEventStreamHelper
         public static class Event
         {
             public static string Name { get; private set; } = "Blood and Beard";
-            public static DateTime StartTime { get; private set; } = new DateTime(new DateOnly(2024, 11, 30), new TimeOnly(13, 00));
-            public static BasicAssetDescriptor<Texture2D> BackgroundAsset = AssetRepository.Textures.StonetalonBackground;
+            public static DateTime StartTime { get; private set; } = new DateTime(new DateOnly(2024, 12, 02), new TimeOnly(17, 00));
+            public static BasicAssetDescriptor<Texture2D> BackgroundAsset = AssetRepository.Textures.BlackrockMountainBackground;
         }
     }
 }

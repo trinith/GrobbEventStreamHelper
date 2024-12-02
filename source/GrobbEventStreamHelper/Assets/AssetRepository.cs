@@ -11,6 +11,7 @@ namespace GrobbEventStreamHelper.Assets
         {
             public static CustomAssetDescriptor<Texture2D> Pixel => new CustomAssetDescriptor<Texture2D>("PixelTexture", CreatePixelTexture);
             public static BasicAssetDescriptor<Texture2D> FactionIcons => new BasicAssetDescriptor<Texture2D>("FactionIcons", @"Textures\FactionIcons");
+            public static BasicAssetDescriptor<Texture2D> BlackrockMountainBackground => new BasicAssetDescriptor<Texture2D>("BlackrockMountainBackground", @"Textures\BlackrockMountainBackground");
             public static BasicAssetDescriptor<Texture2D> FerelasBackground => new BasicAssetDescriptor<Texture2D>("FerelasBackground", @"Textures\FerelasBackground");
             public static BasicAssetDescriptor<Texture2D> StonetalonBackground => new BasicAssetDescriptor<Texture2D>("StonetalonBackground", @"Textures\StonetalonBackground");
             public static BasicAssetDescriptor<Texture2D> WetlandsBackground => new BasicAssetDescriptor<Texture2D>("WetlandsBackground", @"Textures\WetlandsBackground");
